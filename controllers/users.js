@@ -1,7 +1,8 @@
 const User = require("../models/user");
 
 module.exports.renderSignupForm = (req, res) => {
-  res.render("users/signup.ejs");
+  console.log("Signup route hit");
+  return res.render("users/signup.ejs");
 };
 
 module.exports.signup = async (req, res, next) => {
