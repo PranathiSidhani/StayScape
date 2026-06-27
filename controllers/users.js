@@ -12,15 +12,22 @@ module.exports.signup = async (req, res, next) => {
     const newUser = new User({ email, username });
     const registeredUser = await User.register(newUser, password);
 
+    console.log("User registered:", registeredUser);
+
     req.login(registeredUser, (err) => {
       if (err) {
+        console.log("LOGIN ERROR:", err);
         return next(err);
       }
+
+      console.log("User logged in successfully");
 
       req.flash("success", "Welcome to StayScape!");
       return res.redirect("/listings");
     });
   } catch (e) {
+    console.log("SIGNUP ERROR:", e);
+
     req.flash("error", e.message);
     return res.redirect("/signup");
   }
